@@ -1,8 +1,11 @@
 from flask import Flask
 
-from views import views
+from routes.api import api
+from routes.views import views
 
 app = Flask(__name__)
+
+app.register_blueprint(api, url_prefix="/api")
 app.register_blueprint(views, url_prefix="/")
 
 if __name__ == "__main__":
