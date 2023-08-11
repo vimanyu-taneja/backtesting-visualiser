@@ -7,5 +7,6 @@ views = Blueprint("views", __name__)
 def home():
     if request.method == "POST":
         data = request.form
-        ticker = request.form.get("ticker")
-    return render_template("index.html", plot=ticker)
+        ticker = data.get("ticker")
+        return render_template("index.html", plot=ticker)
+    return render_template("index.html")
