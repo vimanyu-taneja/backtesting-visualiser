@@ -1,6 +1,22 @@
 {% extends "layout.html" %} {% block content %}
-<label class="label">Ticker</label>
-<div class="control">
-  <input class="input" type="text" placeholder="e.g. GOOG" />
-</div>
+
+<form method="POST">
+  <h3 class="title">Try it out</h3>
+  <div class="field">
+    <label for="ticker" class="label">Ticker</label>
+    <div class="control">
+      <input
+        type="text"
+        class="input"
+        id="ticker"
+        name="ticker"
+        placeholder="e.g. GOOG"
+      />
+    </div>
+  </div>
+  <div class="control m-5">
+    <button type="submit" class="button is-primary">Submit</button>
+  </div>
+</form>
+
 {% endblock %}
