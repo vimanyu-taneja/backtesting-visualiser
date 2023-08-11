@@ -164,3 +164,4 @@ cython_debug/
 
 # Vercel
 vercel.json
+.vercel
