@@ -20,7 +20,7 @@ def generate_plot():
     bt = Backtest(GOOG, SmaCross, cash=10_000, commission=0.002, exclusive_orders=True)
     stats = bt.run()
     print(stats)
-    bt.plot(filename="tmp/plot.html")
+    bt.plot(filename="tmp/plot.html", open_browser=False)
 
 
 def test():
