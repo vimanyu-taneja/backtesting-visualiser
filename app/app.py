@@ -7,13 +7,16 @@ load_dotenv()
 app = Flask(__name__)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def home():
-    if request.method == "POST":
-        data = request.form
-        ticker = data.get("ticker")
-        return ticker
     return render_template("index.html")
+
+
+@app.route("/api/generate_plot", methods=["POST"])
+def generate_plot():
+    data = request.form
+    ticker = data.get("ticker")
+    return f"<p>{ticker}</p>"
 
 
 if __name__ == "__main__" and os.getenv("FLASK_ENV"):

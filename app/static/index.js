@@ -2,7 +2,7 @@ $(document).on("submit", "#params-form", function (event) {
   event.preventDefault();
   $.ajax({
     type: "POST",
-    url: "/",
+    url: "/api/generate_plot",
     data: {
       ticker: $("#ticker").val(),
     },
