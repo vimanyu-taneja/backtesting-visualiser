@@ -16,11 +16,11 @@ class SmaCross(Strategy):
             self.sell()
 
 
-def generate_plot():
+def generate_plot(filename):
     bt = Backtest(GOOG, SmaCross, cash=10_000, commission=0.002, exclusive_orders=True)
     stats = bt.run()
     print(stats)
-    bt.plot(filename="tmp/plot.html", open_browser=False)
+    bt.plot(filename=filename, open_browser=False)
 
 
 def test():
