@@ -12,7 +12,7 @@ def home():
     if request.method == "POST":
         data = request.form
         ticker = data.get("ticker")
-        return render_template("index.html", plot=ticker)
+        return ticker
     return render_template("index.html")
 
 
