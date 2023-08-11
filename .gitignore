@@ -167,4 +167,4 @@ vercel.json
 .vercel
 
 # Temporary files
-tmp/
+plot.html
