@@ -1,25 +1,23 @@
-import talib
 from backtesting import Backtest, Strategy
 from backtesting.lib import crossover
-from backtesting.test import GOOG
+from backtesting.test import GOOG, SMA
 
 
-class RsiOscillator(Strategy):
-    upper_bound = 70
-    lower_bound = 30
-
+class SmaCross(Strategy):
     def init(self):
-        self.rsi = self.I(talib.RSI, self.data.Close, 14)
+        price = self.data.Close
+        self.ma1 = self.I(SMA, price, 10)
+        self.ma2 = self.I(SMA, price, 20)
 
     def next(self):
-        if crossover(self.rsi, self.upper_bound):
-            self.position.close()
-        elif crossover(self.lower_bound, self.rsi):
+        if crossover(self.ma1, self.ma2):
             self.buy()
+        elif crossover(self.ma2, self.ma1):
+            self.sell()
 
 
 def generate_plot():
-    bt = Backtest(GOOG, RsiOscillator, cash=10_000)
+    bt = Backtest(GOOG, SmaCross, cash=10_000, commission=0.002, exclusive_orders=True)
     stats = bt.run()
     print(stats)
     bt.plot(filename="plot.html")
