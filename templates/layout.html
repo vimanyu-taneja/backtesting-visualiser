@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backtesting visualiser</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+    />
+  </head>
+  <body class="m-5">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <p class="navbar-item subtitle">
+          Backtesting Visualiser by Vimanyu Taneja
+        </p>
+      </div>
+      <div class="navbar-item">
+        <p class="control">
+          <a
+            class="button is-primary"
+            href="https://github.com/vimanyu-taneja/backtesting-visualiser"
+          >
+            <span class="icon">
+              <i class="icon-github icon-large"></i>
+            </span>
+            <span>View code</span>
+          </a>
+        </p>
+      </div>
+    </nav>
+    <div class="container">{% block content %} {% endblock %}</div>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='index.js') }}"
+    ></script>
+  </body>
+</html>
