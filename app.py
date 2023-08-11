@@ -19,8 +19,8 @@ def generate_plot():
     data = request.form
     ticker = data.get("ticker")
     filename = "/tmp/plot.html" if os.getenv("VERCEL") else "plot.html"
-    plotter.generate_plot(filename=filename)
-    return plotter.test()
+    plot = plotter.generate_plot(file_path=filename)
+    return plot
 
 
 if __name__ == "__main__" and os.getenv("FLASK_ENV"):

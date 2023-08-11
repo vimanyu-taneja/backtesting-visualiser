@@ -1,6 +1,7 @@
 from backtesting import Backtest, Strategy
 from backtesting.lib import crossover
 from backtesting.test import GOOG, SMA
+from bs4 import BeautifulSoup
 
 
 class SmaCross(Strategy):
@@ -16,11 +17,31 @@ class SmaCross(Strategy):
             self.sell()
 
 
-def generate_plot(filename):
+def stringify_html_file(file_path):
+    try:
+        with open(file_path, "r") as html_file:
+            html_content = html_file.read()
+            return html_content
+    except FileNotFoundError:
+        print(f"File not found at path: {file_path}")
+        return None
+
+
+def extract_body_from_html(html_string):
+    soup = BeautifulSoup(html_string, "html.parser")
+    body = soup.body
+    if body:
+        return str(body)
+    else:
+        return None
+
+
+def generate_plot(file_path):
     bt = Backtest(GOOG, SmaCross, cash=10_000, commission=0.002, exclusive_orders=True)
     stats = bt.run()
     print(stats)
-    bt.plot(filename=filename, open_browser=False)
+    bt.plot(filename=file_path, open_browser=False)
+    return extract_body_from_html(stringify_html_file(file_path))
 
 
 def test():
