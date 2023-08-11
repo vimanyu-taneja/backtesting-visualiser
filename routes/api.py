@@ -3,6 +3,6 @@ from flask import Blueprint, jsonify, request
 api = Blueprint("api", __name__)
 
 
-@api.route("/update_plot")
-def update_plot():
+@api.route("/generate_plot")
+def generate_plot():
     return "<p>Sample content</p>"
