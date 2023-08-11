@@ -18,6 +18,7 @@ def home():
 def generate_plot():
     data = request.form
     ticker = data.get("ticker")
+    plotter.generate_plot()
     return plotter.test()
 
 
