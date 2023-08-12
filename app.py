@@ -17,9 +17,18 @@ def home():
 @app.route("/api/generate_plot", methods=["POST"])
 def generate_plot():
     data = request.form
-    ticker = data.get("ticker")
-    filename = "/tmp/plot.html" if os.getenv("VERCEL") else "plot.html"
-    plot = plotter.generate_plot(file_path=filename)
+    file_path = "/tmp/plot.html" if os.getenv("VERCEL") else "plot.html"
+    plot = plotter.generate_plot(
+        file_path=file_path,
+        ticker=data.get("ticker") or "GOOG",
+        strategy_name=data.get("strategy"),
+        initial_cash=int(data.get("initialCash") or 1_000),
+        commission=float(data.get("commission") or 2) / 100,
+        margin=1 / float(data.get("leverage") or 1),
+        trade_on_close=data.get("tradeOnClose") == "Yes",
+        hedging=data.get("allowHedging") == "Yes",
+        exclusive_orders=data.get("exclusiveOrders") == "Yes",
+    )
     return plot
 
 

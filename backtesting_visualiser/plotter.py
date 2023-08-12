@@ -36,8 +36,27 @@ def extract_body_from_html(html_string):
         return None
 
 
-def generate_plot(file_path):
-    bt = Backtest(GOOG, SmaCross, cash=10_000, commission=0.002, exclusive_orders=True)
+def generate_plot(
+    file_path,
+    ticker,
+    strategy_name,
+    initial_cash=10_000,
+    commission=0.0,
+    margin=1.0,
+    trade_on_close=False,
+    hedging=False,
+    exclusive_orders=False,
+):
+    bt = Backtest(
+        GOOG,
+        SmaCross,
+        cash=initial_cash,
+        commission=commission,
+        margin=margin,
+        trade_on_close=trade_on_close,
+        hedging=hedging,
+        exclusive_orders=exclusive_orders,
+    )
     stats = bt.run()
     print(stats)
     bt.plot(filename=file_path, open_browser=False)
