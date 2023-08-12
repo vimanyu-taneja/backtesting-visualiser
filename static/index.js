@@ -3,9 +3,7 @@ $(document).on("submit", "#params-form", function (event) {
   $.ajax({
     type: "POST",
     url: "/api/generate_plot",
-    data: {
-      ticker: $("#ticker").val(),
-    },
+    data: $("#params-form").serialize(),
     success: function (response) {
       $("#plot-container").html(response);
     },
