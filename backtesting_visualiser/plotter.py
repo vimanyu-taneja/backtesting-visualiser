@@ -1,6 +1,7 @@
+import yfinance as yf
 from backtesting import Backtest, Strategy
 from backtesting.lib import crossover
-from backtesting.test import GOOG, SMA
+from backtesting.test import SMA
 from bs4 import BeautifulSoup
 
 
@@ -48,7 +49,7 @@ def generate_plot(
     exclusive_orders=False,
 ):
     bt = Backtest(
-        GOOG,
+        yf.download(ticker, start="2018-01-01"),
         SmaCross,
         cash=initial_cash,
         commission=commission,
