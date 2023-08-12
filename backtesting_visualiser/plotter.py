@@ -49,11 +49,3 @@ def generate_plot(
     print(stats)
     bt.plot(filename=file_path, open_browser=False)
     return extract_body_from_html(stringify_html_file(file_path))
-
-
-def test():
-    return """<div class="notification is-link">
-  <button class="delete"></button>
-  Primar lorem ipsum dolor sit amet, consectetur
-  adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur.
-</div>"""
