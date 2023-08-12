@@ -1,21 +1,8 @@
 import yfinance as yf
-from backtesting import Backtest, Strategy
-from backtesting.lib import crossover
-from backtesting.test import SMA
+from backtesting import Backtest
 from bs4 import BeautifulSoup
 
-
-class SmaCross(Strategy):
-    def init(self):
-        price = self.data.Close
-        self.ma1 = self.I(SMA, price, 10)
-        self.ma2 = self.I(SMA, price, 20)
-
-    def next(self):
-        if crossover(self.ma1, self.ma2):
-            self.buy()
-        elif crossover(self.ma2, self.ma1):
-            self.sell()
+from backtesting_visualiser import strategies
 
 
 def stringify_html_file(file_path):
@@ -50,7 +37,7 @@ def generate_plot(
 ):
     bt = Backtest(
         yf.download(ticker, start="2018-01-01"),
-        SmaCross,
+        strategies.SMACross,
         cash=initial_cash,
         commission=commission,
         margin=margin,
