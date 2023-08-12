@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Backtesting visualiser</title>
+    <title>Backtesting Visualiser</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
@@ -20,51 +20,241 @@
       Bokeh.set_log_level("info");
     </script>
   </head>
-
-  <body class="m-5">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <p class="navbar-item subtitle">
-          Backtesting Visualiser by Vimanyu Taneja
-        </p>
+  <body>
+    <div class="level m-5">
+      <div class="level-left">
+        <div class="level-item">
+          <h3 class="title">Backtesting Visualiser</h3>
+        </div>
       </div>
-      <div class="navbar-item">
-        <p class="control">
-          <a
-            class="button is-primary"
-            href="https://github.com/vimanyu-taneja/backtesting-visualiser"
-          >
+      <div class="level-right">
+        <div class="level-item">
+          <button class="button">
             <span class="icon">
               <i class="icon-github icon-large"></i>
             </span>
-            <span>View code</span>
-          </a>
-        </p>
+            <span>View source</span>
+          </button>
+        </div>
       </div>
-    </nav>
-
-    <div class="container m-5">
-      <form method="post" id="params-form">
-        <h3 class="title">Try it out</h3>
-        <div class="field">
-          <label for="ticker" class="label">Ticker</label>
-          <div class="control">
-            <input
-              type="text"
-              class="input"
-              id="ticker"
-              name="ticker"
-              placeholder="e.g. GOOG"
-            />
-          </div>
+    </div>
+    <hr class="solid" />
+    <div class="columns m-5">
+      <div class="column">
+        <div class="card m-5 p-5">
+          <h4 class="title is-4">Parameters</h4>
+          <form method="post" id="params-form">
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label for="ticker" class="label">Ticker</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="GOOG"
+                      id="ticker"
+                      name="ticker"
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label for="strategy" class="label">Strategy</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control"></p>
+                  <div class="select">
+                    <select class="input" id="strategy" name="strategy">
+                      <option selected>SMA crossover</option>
+                      <option>RSI oscillator</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label for="initialCash" class="label">Initial cash</label>
+              </div>
+              <div class="field-body">
+                <div class="field has-addons">
+                  <p class="control">
+                    <a class="button is-static"> $ </a>
+                  </p>
+                  <p class="control">
+                    <input
+                      class="input"
+                      type="number"
+                      placeholder="1000"
+                      min="1"
+                      step="100"
+                      id="initialCash"
+                      name="initialCash"
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label for="commission" class="label">Commission</label>
+              </div>
+              <div class="field-body">
+                <div class="field has-addons">
+                  <p class="control">
+                    <input
+                      class="input"
+                      type="number"
+                      placeholder="2"
+                      min="0"
+                      max="100"
+                      id="commission"
+                      name="commission"
+                    />
+                  </p>
+                  <p class="control">
+                    <a class="button is-static"> % </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label for="leverage" class="label">Leverage</label>
+              </div>
+              <div class="field-body">
+                <div class="field has-addons">
+                  <p class="control">
+                    <input
+                      class="input"
+                      type="number"
+                      placeholder="1"
+                      min="1"
+                      step="1"
+                      id="leverage"
+                      name="leverage"
+                    />
+                  </p>
+                  <p class="control">
+                    <a class="button is-static"> : 1 </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label">
+                <label class="label" for="tradeClose">Trade close?</label>
+              </div>
+              <div class="field-body">
+                <div class="field is-narrow">
+                  <div class="control">
+                    <label class="radio">
+                      <input type="radio" id="tradeClose" name="tradeClose" />
+                      Yes
+                    </label>
+                    <label class="radio">
+                      <input
+                        type="radio"
+                        id="tradeClose"
+                        name="tradeClose"
+                        checked
+                      />
+                      No
+                    </label>
+                  </div>
+                  <p class="help">
+                    If yes, market orders will be filled with the current bar's
+                    closing price
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label">
+                <label class="label" for="allowHedging">Allow hedging?</label>
+              </div>
+              <div class="field-body">
+                <div class="field is-narrow">
+                  <div class="control">
+                    <label class="radio">
+                      <input
+                        type="radio"
+                        id="allowHedging"
+                        name="allowHedging"
+                      />
+                      Yes
+                    </label>
+                    <label class="radio">
+                      <input
+                        type="radio"
+                        id="allowHedging"
+                        name="allowHedging"
+                        checked
+                      />
+                      No
+                    </label>
+                  </div>
+                  <p class="help">
+                    If yes, trades are allowed in both directions simultaneously
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label">
+                <label class="label" for="tradeOnClose"
+                  >Exclusive orders?</label
+                >
+              </div>
+              <div class="field-body">
+                <div class="field is-narrow">
+                  <div class="control">
+                    <label class="radio">
+                      <input
+                        type="radio"
+                        id="tradeOnClose"
+                        name="tradeOnClose"
+                        checked
+                      />
+                      Yes
+                    </label>
+                    <label class="radio">
+                      <input
+                        type="radio"
+                        id="tradeOnClose"
+                        name="tradeOnClose"
+                      />
+                      No
+                    </label>
+                  </div>
+                  <p class="help">
+                    If yes, each new order auto-closes the previous
+                    trade/position
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="control mt-5">
+              <button type="submit" class="button is-success is-fullwidth">
+                <span class="icon">
+                  <i class="icon-check-sign icon-large"></i>
+                </span>
+                <span>Update plot</span>
+              </button>
+            </div>
+          </form>
         </div>
-        <div class="control m-5">
-          <button type="submit" class="button is-primary">Submit</button>
+      </div>
+      <div class="column">
+        <div id="plot-container">
+          <p>Default content</p>
         </div>
-      </form>
-
-      <div id="plot-container">
-        <p>Default content</p>
       </div>
     </div>
     <script
