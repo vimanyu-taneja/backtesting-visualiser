@@ -2,7 +2,7 @@ import yfinance as yf
 from backtesting import Backtest
 from bs4 import BeautifulSoup
 
-from backtesting_visualiser import strategies
+from backtesting_visualiser.strategies import get_strategy
 
 
 def stringify_html_file(file_path):
@@ -37,7 +37,7 @@ def generate_plot(
 ):
     bt = Backtest(
         yf.download(ticker, start="2018-01-01"),
-        strategies.SMACross,
+        get_strategy(strategy_name),
         cash=initial_cash,
         commission=commission,
         margin=margin,
