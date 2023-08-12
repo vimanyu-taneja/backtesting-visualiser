@@ -1,16 +1,20 @@
+import pandas as pd
+import ta
 from backtesting import Strategy
 from backtesting.lib import crossover
-from backtesting.test import SMA
 
 
 class SMACross(Strategy):
+    n1 = 50
+    n2 = 100
+
     def init(self):
-        price = self.data.Close
-        self.ma1 = self.I(SMA, price, 10)
-        self.ma2 = self.I(SMA, price, 20)
+        close = self.data.Close
+        self.sma1 = self.I(ta.trend.sma_indicator, pd.Series(close), self.n1)
+        self.sma2 = self.I(ta.trend.sma_indicator, pd.Series(close), self.n2)
 
     def next(self):
-        if crossover(self.ma1, self.ma2):
+        if crossover(self.sma1, self.sma2):
             self.buy()
-        elif crossover(self.ma2, self.ma1):
+        elif crossover(self.sma2, self.sma1):
             self.sell()
