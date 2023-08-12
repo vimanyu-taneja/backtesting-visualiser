@@ -21,7 +21,5 @@ class SMACross(Strategy):
 
 
 def get_strategy(name):
-    strategies = {
-        "SMA crossover": SMACross,
-    }
+    strategies = {"SMA crossover": SMACross, "RSI oscillator": SMACross}
     return strategies[name]
