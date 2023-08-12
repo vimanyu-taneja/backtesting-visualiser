@@ -1,5 +1,4 @@
-$(document).on("submit", "#params-form", function (event) {
-  event.preventDefault();
+function updateBacktestResults() {
   $.ajax({
     type: "POST",
     url: "/api/generate_plot",
@@ -8,4 +7,13 @@ $(document).on("submit", "#params-form", function (event) {
       $("#plot-container").html(response);
     },
   });
+}
+
+$(document).ready(function () {
+  updateBacktestResults();
+});
+
+$(document).on("submit", "#params-form", function (event) {
+  event.preventDefault();
+  updateBacktestResults();
 });
