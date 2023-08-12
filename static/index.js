@@ -14,6 +14,7 @@ $(document).ready(function () {
 });
 
 $(document).on("submit", "#params-form", function (event) {
+  $("#plot-container").html("<div class='loading'></div>");
   event.preventDefault();
   updateBacktestResults();
 });

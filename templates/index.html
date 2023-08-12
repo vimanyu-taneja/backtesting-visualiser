@@ -6,6 +6,10 @@
     <title>Backtesting Visualiser</title>
     <link
       rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
     <link
@@ -261,10 +265,11 @@
           </form>
         </div>
       </div>
-      <div class="column">
-        <div id="plot-container">
-          <p>Default content</p>
-        </div>
+      <div
+        class="column is-flex is-align-items-center is-justify-content-center"
+        id="plot-container"
+      >
+        <div class="loading"></div>
       </div>
     </div>
     <script
