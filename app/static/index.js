@@ -1,3 +1,14 @@
+$.ajaxSetup({
+  beforeSend: function (xhr, settings) {
+    if (
+      !/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) &&
+      !this.crossDomain
+    ) {
+      xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}");
+    }
+  },
+});
+
 function updateBacktestResults() {
   $.ajax({
     type: "POST",
@@ -13,8 +24,8 @@ $(document).ready(function () {
   updateBacktestResults();
 });
 
-$(document).on("submit", "#params-form", function (event) {
+$("#params-form").submit(function (e) {
   $("#plot-container").html("<div class='loading'></div>");
-  event.preventDefault();
+  e.preventDefault();
   updateBacktestResults();
 });
