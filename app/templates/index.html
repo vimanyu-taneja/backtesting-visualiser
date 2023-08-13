@@ -52,43 +52,33 @@
         <div class="card m-5 p-5">
           <h4 class="title is-4">Parameters</h4>
           <form method="post" id="params-form">
+            {{ form.csrf_token }}
             <div class="field is-horizontal">
               <div class="field-label is-normal">
-                <label for="ticker" class="label">Ticker</label>
+                {{ form.ticker.label(class="label") }}
               </div>
               <div class="field-body">
                 <div class="field">
                   <p class="control">
-                    <input
-                      class="input"
-                      type="text"
-                      placeholder="GOOG"
-                      id="ticker"
-                      name="ticker"
-                    />
+                    {{ form.ticker(class="input", placeholder="GOOG") }}
                   </p>
                 </div>
               </div>
             </div>
             <div class="field is-horizontal">
               <div class="field-label is-normal">
-                <label for="strategy" class="label">Strategy</label>
+                {{ form.strategy.label(class="label") }}
               </div>
               <div class="field-body">
                 <div class="field">
                   <p class="control"></p>
-                  <div class="select">
-                    <select class="input" id="strategy" name="strategy">
-                      <option selected>SMA crossover</option>
-                      <option>RSI oscillator</option>
-                    </select>
-                  </div>
+                  <div class="select">{{ form.strategy(class="input") }}</div>
                 </div>
               </div>
             </div>
             <div class="field is-horizontal">
               <div class="field-label is-normal">
-                <label for="initialCash" class="label">Initial cash</label>
+                {{ form.initial_cash.label(class="label") }}
               </div>
               <div class="field-body">
                 <div class="field has-addons">
@@ -96,35 +86,19 @@
                     <a class="button is-static"> $ </a>
                   </p>
                   <p class="control">
-                    <input
-                      class="input"
-                      type="number"
-                      placeholder="1000"
-                      min="1"
-                      step="100"
-                      id="initialCash"
-                      name="initialCash"
-                    />
+                    {{ form.initial_cash(class="input", placeholder="1000") }}
                   </p>
                 </div>
               </div>
             </div>
             <div class="field is-horizontal">
               <div class="field-label is-normal">
-                <label for="commission" class="label">Commission</label>
+                {{ form.commission.label(class="label") }}
               </div>
               <div class="field-body">
                 <div class="field has-addons">
                   <p class="control">
-                    <input
-                      class="input"
-                      type="number"
-                      placeholder="2"
-                      min="-10"
-                      max="10"
-                      id="commission"
-                      name="commission"
-                    />
+                    {{ form.commission(class="input", placeholder="2") }}
                   </p>
                   <p class="control">
                     <a class="button is-static"> % </a>
@@ -134,20 +108,12 @@
             </div>
             <div class="field is-horizontal">
               <div class="field-label is-normal">
-                <label for="leverage" class="label">Leverage</label>
+                {{ form.leverage_multiple.label(class="label") }}
               </div>
               <div class="field-body">
                 <div class="field has-addons">
                   <p class="control">
-                    <input
-                      class="input"
-                      type="number"
-                      placeholder="1"
-                      min="1"
-                      step="1"
-                      id="leverage"
-                      name="leverage"
-                    />
+                    {{ form.leverage_multiple(class="input", placeholder="1") }}
                   </p>
                   <p class="control">
                     <a class="button is-static"> : 1 </a>
@@ -157,30 +123,18 @@
             </div>
             <div class="field is-horizontal">
               <div class="field-label">
-                <label class="label" for="tradeOnClose">Trade on close?</label>
+                {{ form.trade_on_close.label(class="label") }}
               </div>
               <div class="field-body">
                 <div class="field is-narrow">
-                  <div class="control">
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        id="tradeOnClose"
-                        name="tradeOnClose"
-                        value="Yes"
-                      />
-                      Yes
-                    </label>
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        id="tradeOnClose"
-                        name="tradeOnClose"
-                        value="No"
-                        checked
-                      />
-                      No
-                    </label>
+                  <div
+                    class="control is-flex is-align-items-flex-start is-flex-wrap-wrap"
+                  >
+                    {% for option in form.trade_on_close %}
+                    <div class="pr-3">
+                      {{ option }} {{ option.label(class="radio") }}
+                    </div>
+                    {% endfor %}
                   </div>
                   <p class="help">
                     If yes, market orders will be filled with the current bar's
@@ -191,30 +145,18 @@
             </div>
             <div class="field is-horizontal">
               <div class="field-label">
-                <label class="label" for="allowHedging">Allow hedging?</label>
+                {{ form.allow_hedging.label(class="label") }}
               </div>
               <div class="field-body">
                 <div class="field is-narrow">
-                  <div class="control">
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        id="allowHedging"
-                        name="allowHedging"
-                        value="Yes"
-                      />
-                      Yes
-                    </label>
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        id="allowHedging"
-                        name="allowHedging"
-                        value="No"
-                        checked
-                      />
-                      No
-                    </label>
+                  <div
+                    class="control is-flex is-align-items-flex-start is-flex-wrap-wrap"
+                  >
+                    {% for option in form.allow_hedging %}
+                    <div class="pr-3">
+                      {{ option }} {{ option.label(class="radio") }}
+                    </div>
+                    {% endfor %}
                   </div>
                   <p class="help">
                     If yes, trades are allowed in both directions simultaneously
@@ -224,32 +166,18 @@
             </div>
             <div class="field is-horizontal">
               <div class="field-label">
-                <label class="label" for="exclusiveOrders"
-                  >Exclusive orders?</label
-                >
+                {{ form.exclusive_orders.label(class="label") }}
               </div>
               <div class="field-body">
                 <div class="field is-narrow">
-                  <div class="control">
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        id="exclusiveOrders"
-                        name="exclusiveOrders"
-                        value="Yes"
-                        checked
-                      />
-                      Yes
-                    </label>
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        id="exclusiveOrders"
-                        name="exclusiveOrders"
-                        value="No"
-                      />
-                      No
-                    </label>
+                  <div
+                    class="control is-flex is-align-items-flex-start is-flex-wrap-wrap"
+                  >
+                    {% for option in form.exclusive_orders %}
+                    <div class="pr-3">
+                      {{ option }} {{ option.label(class="radio") }}
+                    </div>
+                    {% endfor %}
                   </div>
                   <p class="help">
                     If yes, each new order auto-closes the previous

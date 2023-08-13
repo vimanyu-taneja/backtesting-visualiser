@@ -3,15 +3,17 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
 
+from app.forms import ParamsForm
 from backtesting_visualiser import plotter
 
 load_dotenv()
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "d3628918c1805d96607f47eaf3c659f60f28da61f393bf9a"
 
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", form=ParamsForm())
 
 
 @app.route("/api/generate_plot", methods=["POST"])
