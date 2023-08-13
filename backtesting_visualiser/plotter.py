@@ -6,13 +6,9 @@ from backtesting_visualiser.strategies import get_strategy
 
 
 def stringify_html_file(file_path):
-    try:
-        with open(file_path, "r") as html_file:
-            html_content = html_file.read()
-            return html_content
-    except FileNotFoundError:
-        print(f"File not found at path: {file_path}")
-        return None
+    with open(file_path, "r") as html_file:
+        html_content = html_file.read()
+        return html_content
 
 
 def extract_body_from_html(html_string):
