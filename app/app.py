@@ -24,12 +24,12 @@ def generate_plot():
         file_path=file_path,
         ticker=data.get("ticker") or "GOOG",
         strategy_name=data.get("strategy"),
-        initial_cash=int(data.get("initialCash") or 1_000),
+        initial_cash=int(data.get("initial_cash") or 1_000),
         commission=float(data.get("commission") or 2) / 100,
         margin=1 / float(data.get("leverage") or 1),
-        trade_on_close=data.get("tradeOnClose") == "Yes",
-        hedging=data.get("allowHedging") == "Yes",
-        exclusive_orders=data.get("exclusiveOrders") == "Yes",
+        trade_on_close=data.get("trade_on_close") == "Yes",
+        hedging=data.get("allow_hedging") == "Yes",
+        exclusive_orders=data.get("exclusive_orders") == "Yes",
     )
     return plot
 
