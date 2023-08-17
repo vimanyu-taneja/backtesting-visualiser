@@ -19,7 +19,7 @@ class RSIOscillator(Strategy):
             self.sell()
 
 
-class SMACross(Strategy):
+class SMACrossover(Strategy):
     n1 = 50
     n2 = 100
 
@@ -36,5 +36,5 @@ class SMACross(Strategy):
 
 
 def get_strategy(name):
-    strategies = {"RSI oscillator": RSIOscillator, "SMA crossover": SMACross}
+    strategies = {"RSI oscillator": RSIOscillator, "SMA crossover": SMACrossover}
     return strategies[name]
