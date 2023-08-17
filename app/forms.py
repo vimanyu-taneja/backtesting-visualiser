@@ -8,6 +8,7 @@ class ParamsForm(FlaskForm):
     strategy = SelectField(
         "Strategy",
         choices=[
+            ("Bollinger bands", "Bollinger bands"),
             ("SMA crossover", "SMA crossover"),
             ("RSI oscillator", "RSI oscillator"),
         ],
